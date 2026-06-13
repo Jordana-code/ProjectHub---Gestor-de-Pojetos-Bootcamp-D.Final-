@@ -1,154 +1,215 @@
 # ProjectHub — Gestor de Projetos
 
-Aplicação web para criar, acompanhar e gerenciar projetos por status
-(*Em Planejamento*, *Em Andamento*, *Concluído*), com painel de métricas,
-modo claro/escuro e persistência dos dados em um banco de dados na nuvem.
+**Organize, acompanhe e gerencie seus projetos em um único painel, com persistência em nuvem e suporte a tema claro/escuro.**
 
-> Entrega final — Etapa colaborativa (trabalho em equipe, PRs, Banco de
-> Dados em nuvem, CI/CD e Deploy).
+
+[![Deploy](https://img.shields.io/badge/Deploy-online-brightgreen?logo=vercel)](https://SEU-LINK-DE-DEPLOY.vercel.app)
+[![Jest](https://img.shields.io/badge/Tested%20with-Jest-C21325?logo=jest)](https://jestjs.io)
+[![Supabase](https://img.shields.io/badge/Database-Supabase-3ECF8E?logo=supabase)](https://supabase.com)
+[![License](https://img.shields.io/badge/Licença-Acadêmica-blue)](#-licença)
+
+> Entrega final — Etapa colaborativa.
+
+</div>
 
 ---
 
-## 👥 Integrantes do Grupo
+## 📑 Sumário
 
-> Preencher com o nome completo e a matrícula de cada integrante.
-
-| Nome completo | Matrícula | GitHub |
-|---|---|---|
-| Jordana Moreira | (preencher) | [@Jordana-code](https://github.com/Jordana-code) |
-| Caio Godoy | (preencher) | [@1caiogodoy](https://github.com/1caiogodoy) |
-| Gabriella Lima | (preencher) | [@gabriellalmendes](https://github.com/gabriellalmendes) |
-| (integrante 4, se houver) | (preencher) | (preencher) |
-| (integrante 5, se houver) | (preencher) | (preencher) |
+- [Links](#-links)
+- [Integrantes do Grupo](#-integrantes-do-grupo)
+- [Visão Geral](#-visão-geral)
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Arquitetura da Aplicação](#️-arquitetura-da-aplicação)
+- [Banco de Dados — Supabase](#️-banco-de-dados--supabase)
+- [Testes e CI/CD](#-testes-e-cicd)
+- [Design System](#-design-system)
+- [Fluxo de Trabalho da Equipe](#-fluxo-de-trabalho-da-equipe)
+- [Licença](#-licença)
 
 ---
 
 ## 🔗 Links
 
-- **Repositório:** `(preencher com a URL pública do repositório no GitHub)`
-- **Aplicação publicada (Deploy):** `(preencher com a URL do Vercel/Render/Netlify)`
+| | Descrição | URL |
+|---|---|---|
+| <img src="https://cdn.simpleicons.org/github/white" width="18"/> | Repositório GitHub | [Acessar](https://github.com/SEU-USUARIO/SEU-REPO) |
+| <img src="https://cdn.simpleicons.org/vercel/white" width="18"/> | Aplicação publicada (Deploy) | [Acessar](https://SEU-LINK-DE-DEPLOY.vercel.app) |
+| <img src="https://cdn.simpleicons.org/supabase" width="18"/> | Projeto no Supabase | [Acessar](https://supabase.com/dashboard/project/SEU-PROJETO) |
+---
+
+## 👥 Integrantes do Grupo
+
+| Nome | GitHub |
+|---|---|
+| Jordana Moreira | [@Jordana-code](https://github.com/Jordana-code) |
+| Caio Godoy | [@1caiogodoy](https://github.com/1caiogodoy) |
+| Gabriella Lima | [@gabriellalmendes](https://github.com/gabriellalmendes) |
 
 ---
 
-## 🚀 Tecnologias
+## 🧭 Visão Geral
 
-- HTML5, CSS3, JavaScript (vanilla)
-- [Font Awesome](https://fontawesome.com/) (ícones)
-- **Banco de dados em nuvem:** [Supabase](https://supabase.com) (PostgreSQL)
-- **Testes:** [Jest](https://jestjs.io/)
-- **CI/CD:** GitHub Actions
-- **Deploy:** Vercel (ou outro serviço de hospedagem estática)
+O **ProjectHub** é uma aplicação web para criação, organização e acompanhamento de projetos por status de andamento, com painel de métricas em tempo real e persistência em nuvem via **Supabase (PostgreSQL)**. Os projetos são organizados em três etapas:
 
----
-
-## 🗄️ Banco de Dados
-
-Os projetos não são mais salvos em `localStorage`. Toda a persistência
-(criação, leitura, edição e exclusão) é feita em uma tabela `projects` em um
-projeto Supabase (PostgreSQL na nuvem).
-
-### Como configurar o seu próprio projeto Supabase
-
-1. Crie uma conta gratuita em [supabase.com](https://supabase.com) e crie um
-   novo projeto.
-2. Abra o **SQL Editor** do projeto e execute o conteúdo do arquivo
-   [`database/schema.sql`](./database/schema.sql). Isso cria a tabela
-   `projects`, as políticas de acesso (RLS) e dois projetos de exemplo.
-3. Vá em **Project Settings → API** e copie:
-   - **Project URL**
-   - **anon public key**
-4. Abra o arquivo [`config.js`](./config.js) e substitua:
-
-```js
-   const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
-   const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_PUBLICA_AQUI';
-```
-
-   pelos valores do seu projeto.
-
-> ⚠️ A `anon key` do Supabase é pública por design — a segurança fica a
-> cargo das políticas de Row Level Security (RLS), já configuradas no
-> `schema.sql`. Para um projeto real com dados sensíveis, restrinja o
-> acesso por usuário autenticado.
+| Status | Descrição |
+|---|---|
+| 🧭 Em Planejamento | Projeto definido, ainda não iniciado |
+| 📈 Em Andamento | Projeto em execução ativa |
+| ✅ Concluído | Projeto finalizado e entregue |
 
 ---
 
-## 💻 Como rodar localmente
+## ✨ Funcionalidades
 
-Como o projeto é um site estático (HTML/CSS/JS), basta servir os arquivos:
-
-```bash
-# Clone o repositório
-git clone <URL_DO_REPOSITORIO>
-cd <NOME_DO_REPOSITORIO>
-
-# Configure o config.js (ver seção "Banco de Dados" acima)
-
-# Sirva os arquivos com qualquer servidor estático, por exemplo:
-npx serve .
-# ou, com a extensão "Live Server" do VS Code
-```
-
-Abra o endereço informado no terminal (ex: `http://localhost:3000`).
+- **CRUD completo** — criar, listar, editar e excluir projetos via modal, com confirmação antes de remover;
+- **Filtros por status** na sidebar com contadores ao vivo e estado vazio amigável;
+- **Painel de métricas** com quatro cartões e barras de progresso proporcionais ao total;
+- **Modo Claro / Escuro** com preferência salva via `localStorage`;
+- **Notificações toast** (sucesso em verde, erro em vermelho) e indicador de carregamento;
+- **Proteção XSS** via `escapeHtml()` em todos os dados exibidos;
+- **RLS no Supabase** para controle de acesso aos dados.
 
 ---
 
-## ✅ Testes Automatizados
+## 🚀 Tecnologias Utilizadas
 
-As funções utilitárias (validação, cálculo de métricas, filtros e
-conversão de dados para o Supabase) ficam em `utils.js` e são testadas com
-Jest em `__tests__/utils.test.js`.
-
-```bash
-npm install
-npm test
-```
-
-O workflow [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) executa
-`npm test` automaticamente em todo **push** e **pull request** para a branch
-`main`, via GitHub Actions.
-
----
-
-## 🌐 Deploy
-
-A aplicação é estática e pode ser publicada em qualquer serviço de
-hospedagem estática (Vercel, Netlify, GitHub Pages, Render, etc.).
-
-Exemplo com a Vercel:
-
-1. Importe o repositório em [vercel.com](https://vercel.com).
-2. Não é necessário configurar build (projeto estático).
-3. Após o deploy, atualize o link em "Links" acima.
-
-> Lembre-se de configurar o `config.js` com as credenciais do Supabase
-> *antes* do deploy (ou, em uma evolução futura, mover essas chaves para
-> variáveis de ambiente injetadas no build).
-
----
-
-## 🤝 Fluxo de Trabalho da Equipe (Issues, Branches e PRs)
-
-Veja o arquivo [`CONTRIBUTING.md`](./CONTRIBUTING.md) para o passo a passo
-completo que cada integrante deve seguir (criação de Issues, branches,
-abertura de Pull Requests e Code Review).
+| Camada | Tecnologia |
+|---|---|
+| Estrutura | HTML5 |
+| Estilo | CSS3 (variáveis customizadas, temas claro/escuro) |
+| Lógica | JavaScript Vanilla ES6+ |
+| Ícones | [Font Awesome 6](https://fontawesome.com/) |
+| Fonte | [Inter](https://fonts.google.com/specimen/Inter) |
+| Banco de Dados | [Supabase](https://supabase.com) (PostgreSQL na nuvem) |
+| Testes | [Jest 29](https://jestjs.io/) |
+| CI/CD | GitHub Actions |
+| Hospedagem | GitHub Pages |
 
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```
-.
-├── .github/workflows/ci.yml   # Pipeline de CI (testes automáticos)
-├── __tests__/utils.test.js    # Testes automatizados (Jest)
-├── database/schema.sql        # Script de criação da tabela no Supabase
-├── config.js                  # Configuração de conexão com o Supabase
-├── utils.js                   # Funções utilitárias (puras e testáveis)
-├── script.js                  # Lógica principal da aplicação (CRUD)
-├── index.html                 # Estrutura da página
-├── style.css                  # Estilos
-├── management.png             # Ícone (favicon)
-├── package.json
-├── CONTRIBUTING.md             # Guia de colaboração (issues/branches/PRs)
-└── README.md
+projecthub/
+├── .github/workflows/ci.yml    # Pipeline de CI: roda testes a cada push/PR
+├── __tests__/utils.test.js     # Testes unitários (Jest)
+├── database/schema.sql         # Script SQL: tabela "projects" e políticas RLS
+├── config.js                   # Conexão com o Supabase (URL + anon key)
+├── utils.js                    # Funções puras e testáveis
+├── script.js                   # Lógica principal (CRUD, renderização, UI)
+├── index.html                  # Estrutura da página
+├── style.css                   # Estilos e design tokens
+├── management.png              # Ícone/favicon
+├── package.json                # Dependências de desenvolvimento          
+└── README.md                   # Este arquivo
 ```
+
+---
+
+## ⚙️ Arquitetura da Aplicação
+
+```
+┌─────────────────────────────────────────────────┐
+│          index.html  +  style.css               │
+│       (Estrutura visual / Design Tokens)         │
+├───────────────────┬─────────────────────────────┤
+│    script.js      │         utils.js             │
+│  (CRUD, UI, DOM)  │  escapeHtml, computeMetrics  │
+│                   │  filterProjects, mapFromDb   │
+├───────────────────┴─────────────────────────────┤
+│    config.js  (URL + anon key + supabaseClient) │
+├─────────────────────────────────────────────────┤
+│           Supabase — tabela: projects            │
+└─────────────────────────────────────────────────┘
+```
+
+**`utils.js`** concentra funções puras reutilizadas pelo `script.js` e pelos testes: `escapeHtml`, `computeMetrics`, `filterProjects`, `mapFromDb` e `mapToDb`.
+
+**`script.js`** orquestra a aplicação: busca dados (`fetchProjects`), executa o CRUD (`createProjectInDb`, `updateProjectInDb`, `deleteProjectInDb`), renderiza cartões e métricas, controla o modal e alterna o tema.
+
+---
+
+## 🗄️ Banco de Dados — Supabase
+
+### Estrutura da tabela `projects`
+
+| Coluna | Tipo | Descrição |
+|---|---|---|
+| `id` | `bigserial` | Chave primária (auto-incremento) |
+| `title` | `text` | Nome do projeto |
+| `description` | `text` | Descrição/objetivo |
+| `status` | `text` | `Em Planejamento` \| `Em Andamento` \| `Concluído` |
+| `created_at` | `timestamptz` | Data de criação (usada para ordenar) |
+
+
+
+
+---
+
+## ✅ Testes e CI/CD
+
+As funções de `utils.js` são testadas com **Jest** — por serem puras, não dependem do DOM nem do banco.
+
+```bash
+npm test
+```
+
+| Função testada | O que verifica |
+|---|---|
+| `escapeHtml` | Escapa `<`, `>`, `&` e `"` corretamente |
+| `computeMetrics` | Totais por status a partir da lista de projetos |
+| `filterProjects` | Filtro `'todos'` e por status específico |
+| `mapFromDb` / `mapToDb` | Conversão entre formato do Supabase e formato interno |
+
+O workflow `.github/workflows/ci.yml` executa `npm test` automaticamente em todo **push** e **pull request** para a branch `main`. O badge de CI no topo reflete o status atual.
+
+---
+
+## 🎨 Design System
+
+Tokens CSS definidos em `:root`, sobrescritos em `[data-theme="dark"]`:
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--accent` | `#6366F1` | Botões, links ativos, foco |
+| `--planning-color` | `#64748B` | Status "Em Planejamento" |
+| `--progress-color` | `#D97706` | Status "Em Andamento" |
+| `--done-color` | `#059669` | Status "Concluído" |
+| `--sidebar-bg` | `#0F1117` | Sidebar (sempre escura) |
+
+- **Fonte**: Inter (pesos 400–800) · **Raios**: `8px` / `12px` / `16px` · **Transições**: `0.2s ease`
+- **Layout**: sidebar fixa de `260px` + área principal com grade responsiva
+
+---
+
+## 🤝 Fluxo de Trabalho da Equipe
+
+1. Issues abertas por funcionalidade;
+2. Branches por feature (`feature/nome`);
+3. Pull Requests com descrição e code review entre integrantes;
+4. Merge liberado apenas com CI passando na `main`.
+
+### Checklist de entrega
+
+- [x] Todos os integrantes adicionados como *Collaborators*
+- [ ] Cada integrante abriu pelo menos 1 PR
+- [ ] Cada PR foi revisado e mergeado por outro integrante
+- [ ] CI passando na branch `main`
+- [ ] `config.js` configurado e tabela criada via `schema.sql`
+- [ ] Aplicação publicada com link funcionando
+- [ ] `README.md` atualizado com links e integrantes
+
+---
+
+## 📄 Licença
+
+Projeto acadêmico desenvolvido para fins educacionais. Sinta-se livre para utilizá-lo como referência, desde que mantida a devida atribuição aos autores originais.
+
+---
+
+<div align="center">
+  <sub>Feito com 💜 por Jordana Moreira, Caio Godoy e Gabriella Lima &nbsp;·&nbsp; © 2026 ProjectHub</sub>
+</div>
