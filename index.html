@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Projetos</title>
+    <link rel="shortcut icon" href="management.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-shell">
+        <!-- ======================== SIDEBAR ======================== -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">Project<strong>Hub</strong></span>
+                    <span class="brand-tagline">Workspace</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section-label">Filtrar por Status</div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-filter="todos">
+                    <span class="nav-icon"><i class="fa-solid fa-squares-four"></i></span>
+                    <span class="nav-label">Todos os Projetos</span>
+                    <span class="nav-badge" id="badge-todos">0</span>
+                </a>
+                <a href="#" class="nav-item" data-filter="Em Planejamento">
+                    <span class="nav-icon"><i class="fa-solid fa-compass-drafting"></i></span>
+                    <span class="nav-label">Planejamento</span>
+                    <span class="nav-badge planning" id="badge-planejamento">0</span>
+                </a>
+                <a href="#" class="nav-item" data-filter="Em Andamento">
+                    <span class="nav-icon"><i class="fa-solid fa-arrow-trend-up"></i></span>
+                    <span class="nav-label">Em Andamento</span>
+                    <span class="nav-badge progress" id="badge-andamento">0</span>
+                </a>
+                <a href="#" class="nav-item" data-filter="Concluído">
+                    <span class="nav-icon"><i class="fa-solid fa-circle-check"></i></span>
+                    <span class="nav-label">Concluídos</span>
+                    <span class="nav-badge done" id="badge-concluido">0</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="theme-toggle" title="Alternar Tema">
+                    <i class="fa-solid fa-moon"></i>
+                    <span id="themeLabel">Modo Escuro</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ======================== MAIN ======================== -->
+        <div class="main-wrapper">
+            <main class="main-content">
+
+                <!-- TOP BAR -->
+                <header class="topbar">
+                    <div class="topbar-left">
+                        <h1 class="page-title">Painel de Controle</h1>
+                        <p class="page-subtitle" id="dynamicSubtitle">Acompanhe e gerencie seus projetos em um só lugar.</p>
+                    </div>
+                    <div class="topbar-right">
+                        <button class="btn-new-project" id="openModalBtn">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Novo Projeto</span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- METRICS -->
+                <section class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon-wrap total">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value" id="count-todos">0</span>
+                            <span class="metric-label">Total de Projetos</span>
+                        </div>
+                        <div class="metric-bar-wrap">
+                            <div class="metric-bar total-bar" id="bar-total"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon-wrap planning">
+                            <i class="fa-solid fa-compass-drafting"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value planning-val" id="count-planejamento">0</span>
+                            <span class="metric-label">Em Planejamento</span>
+                        </div>
+                        <div class="metric-bar-wrap">
+                            <div class="metric-bar planning-bar" id="bar-planejamento"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon-wrap progress">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value progress-val" id="count-andamento">0</span>
+                            <span class="metric-label">Em Andamento</span>
+                        </div>
+                        <div class="metric-bar-wrap">
+                            <div class="metric-bar progress-bar" id="bar-andamento"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon-wrap done">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value done-val" id="count-concluido">0</span>
+                            <span class="metric-label">Concluídos</span>
+                        </div>
+                        <div class="metric-bar-wrap">
+                            <div class="metric-bar done-bar" id="bar-concluido"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROJECTS SECTION -->
+                <section class="projects-section">
+                    <div class="projects-header">
+                        <div class="projects-title-wrap">
+                            <h2 class="projects-title" id="sectionTitle">Todos os Projetos</h2>
+                            <span class="projects-count-tag" id="projectCountTag">0 projetos</span>
+                        </div>
+                    </div>
+                    <div class="projects-grid" id="projectsGrid"></div>
+                </section>
+
+            </main>
+
+            <footer class="app-footer">
+                <p class="footer-copy">&copy; 2026 ProjectHub. Desenvolvido com harmonia.</p>
+                <div class="footer-devs">
+                    <a href="https://github.com/Jordana-code" target="_blank" rel="noopener noreferrer" class="dev-link">
+                        <i class="fa-brands fa-github"></i> Jordana Moreira
+                    </a>
+                    <span class="footer-dot">·</span>
+                    <a href="https://github.com/1caiogodoy" target="_blank" rel="noopener noreferrer" class="dev-link">
+                        <i class="fa-brands fa-github"></i> Caio Godoy
+                    </a>
+                    <span class="footer-dot">·</span>
+                    <a href="https://github.com/gabriellalmendes" target="_blank" rel="noopener noreferrer" class="dev-link">
+                        <i class="fa-brands fa-github"></i> Gabriella Lima
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ======================== MODAL ======================== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <div class="modal-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 id="modalTitle">Criar Novo Projeto</h3>
+                </div>
+                <button class="modal-close" id="closeModalBtn" aria-label="Fechar modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="projectForm" novalidate>
+                <input type="hidden" id="projId">
+
+                <div class="form-group">
+                    <label for="projTitle">Nome do Projeto</label>
+                    <div class="input-wrap">
+                        <i class="fa-regular fa-folder input-icon"></i>
+                        <input type="text" id="projTitle" required placeholder="Ex: Redesign do E-commerce">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="projDesc">Descrição</label>
+                    <textarea id="projDesc" rows="3" required placeholder="Descreva o objetivo principal do projeto..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="projStatus">Status Atual</label>
+                    <div class="select-wrap">
+                        <select id="projStatus">
+                            <option value="Em Planejamento">🧭  Em Planejamento</option>
+                            <option value="Em Andamento">📈  Em Andamento</option>
+                            <option value="Concluído">✅  Concluído</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn-save" id="saveBtn">
+                        <i class="fa-solid fa-floppy-disk"></i> Salvar Projeto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================== TOAST ======================== -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span id="toastMsg">Projeto salvo com sucesso!</span>
+    </div>
+
+    <!-- SDK do Supabase (cliente para falar com o banco de dados na nuvem) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Configuração de conexão com o Supabase (URL + chave do projeto) -->
+    <script src="config.js"></script>
+    <!-- Funções utilitárias compartilhadas e testáveis -->
+    <script src="utils.js"></script>
+    <!-- Lógica principal da aplicação -->
+    <script src="script.js"></script>
+</body>
+</html>
