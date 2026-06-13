@@ -1,0 +1,12 @@
+{
+  "name": "projecthub",
+  "version": "1.0.0",
+  "description": "ProjectHub - Gestor de Projetos com persistência em Supabase",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
