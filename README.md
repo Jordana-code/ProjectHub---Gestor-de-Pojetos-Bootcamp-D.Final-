@@ -36,7 +36,7 @@
 | | Descrição | URL |
 |---|---|---|
 | <img src="https://cdn.simpleicons.org/github/white" width="18"/> | Repositório GitHub | [Acessar](https://github.com/Jordana-code/ProjectHub---Gestor-de-Pojetos-Bootcamp-D.Final-) |
-| <img src="https://cdn.simpleicons.org/vercel/white" width="18"/> | Aplicação publicada (Deploy) | [Acessar](https://SEU-LINK-DE-DEPLOY.vercel.app) |
+| <img src="https://cdn.simpleicons.org/vercel/white" width="18"/> | Aplicação publicada (Deploy) | [Acessar](https://jordana-code.github.io/ProjectHub---Gestor-de-Pojetos-Bootcamp-D.Final-/) |
 | <img src="https://cdn.simpleicons.org/supabase" width="18"/> | Projeto no Supabase | [Acessar](https://github.com/Jordana-code/ProjectHub---Gestor-de-Pojetos-Bootcamp-D.Final-) |
 ---
 
