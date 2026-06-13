@@ -195,12 +195,12 @@ Tokens CSS definidos em `:root`, sobrescritos em `[data-theme="dark"]`:
 ### Checklist de entrega
 
 - [x] Todos os integrantes adicionados como *Collaborators*
-- [ ] Cada integrante abriu pelo menos 1 PR
-- [ ] Cada PR foi revisado e mergeado por outro integrante
-- [ ] CI passando na branch `main`
-- [ ] `config.js` configurado e tabela criada via `schema.sql`
-- [ ] Aplicação publicada com link funcionando
-- [ ] `README.md` atualizado com links e integrantes
+- [X] Cada integrante abriu pelo menos 1 PR
+- [X] Cada PR foi revisado e mergeado por outro integrante
+- [X] CI passando na branch `main`
+- [X] `config.js` configurado e tabela criada via `schema.sql`
+- [X] Aplicação publicada com link funcionando
+- [X] `README.md` atualizado com links e integrantes
 
 ---
 
